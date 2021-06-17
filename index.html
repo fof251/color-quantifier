@@ -256,7 +256,7 @@
 
            // puts new image data from the above for loop onto second canvas starting from point (0,0)
 
-           context.putImageData(imageData, 0, 0);
+           context2.putImageData(imageData, 0, 0);
 
           
 
@@ -333,7 +333,7 @@ function draw() {
 
     //defines touch variable to make the following code a little simpler
 
-    var touch = event.onclick[0];
+    var touch = event.touches[0];
 
     //Fixes the value of pageX off set by the page scroll
 
