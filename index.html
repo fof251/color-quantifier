@@ -315,8 +315,13 @@ function reset()
    coords = [];
 
 }
-
-
+// function to hanfle touch and click at the same time
+function handleInteraction(evt) {
+    evt.preventDefault()
+    console.log('interacted')
+  }
+el.addEventListener('touchstart', handleInteraction)
+el.addEventListener('click', handleInteraction)
 
 
 //Creates drawing function for when user touches canvas
