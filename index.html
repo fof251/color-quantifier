@@ -332,7 +332,6 @@ el.addEventListener('click', handleInteraction)
             mouse.startX = mouse.x;
             mouse.startY = mouse.y;
             element = document.createElement('div');
-            element.className = 'rectangle'
             element.style.left = mouse.x + 'px';
             element.style.top = mouse.y + 'px';
             canvas.appendChild(element)
@@ -341,6 +340,25 @@ el.addEventListener('click', handleInteraction)
     }
 }
 
+  namespace ColorPickerUX.Behaviors
+{
+    public class OpenFlyoutAction : DependencyObject, IAction
+    {
+        public object Execute(object sender, object parameter)
+        {
+            FlyoutBase.ShowAttachedFlyout(TargetObject ?? (FrameworkElement)sender);
+            return null;
+        }
+
+        public Control TargetObject
+        {
+            get { return (Control)GetValue(TargetObjectProperty); }
+            set { SetValue(TargetObjectProperty, value); }
+        }
+        public static readonly DependencyProperty TargetObjectProperty =
+            DependencyProperty.Register(nameof(TargetObject), typeof(Control), typeof(OpenFlyoutAction), new PropertyMetadata(null));
+    }
+}
 //Creates drawing function for when user touches canvas
 
 function draw() {
@@ -383,11 +401,7 @@ function draw() {
 
     }
 
-   //following alert pops up if there are already 2 rectangles on the canvas, prevents user from adding more
-
-   else{
-
-     alert("Too many rectangles! Press the reset button to start over.");
+ 
 
    }
 
