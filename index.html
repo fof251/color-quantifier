@@ -318,65 +318,61 @@ function reset()
 
 //Creates drawing function for when user touches canvas
   
-if (event.type == "touchstart") {
-                $(this).off('click');
-                console.log("Only touch event is fired");
-                
-               function draw() {
+
+//Creates drawing function for when user touches canvas
+
+function draw() {
 
 //if statement for when context is called
 
-                if (canvas.getContext) {
+ if (canvas.getContext) {
 
    //following code only happens if there are >2 rectangles on the canvas
 
-                 if (coords.length<4){
+   if (coords.length<4){
 
     //defines touch variable to make the following code a little simpler
 
-                  var touch = event.touches[0];
+    var touch = event.touches[0];
 
     //Fixes the value of pageX off set by the page scroll
 
-                  var touchX = touch.pageX-touch.target.offsetLeft;
+    var touchX = touch.pageX-touch.target.offsetLeft;
 
     //Fixes value of pageY. Now rectangles on the canvas appear on the touch target
 
-                  var touchY = touch.pageY-touch.target.offsetTop;
+    var touchY = touch.pageY-touch.target.offsetTop;
 
     //Changes color of rectangle border
 
-                  context.strokeStyle="#FF0000";
+    context.strokeStyle="#FF0000";
 
     //Changes width of rectangle border
 
-                  context.lineWidth=3;
+    context.lineWidth=3;
 
     //Draws 250x300 rectangle outline so that top left corner is where user touches
 
-                  context.strokeRect(touchX, touchY, 150, 200);
+    context.strokeRect(touchX, touchY, 150, 200);
 
     //Adds touchX and touchY to array coords
 
-                  coords.push(touchX,touchY);
+    coords.push(touchX,touchY);
 
-                  }
+    }
 
    //following alert pops up if there are already 2 rectangles on the canvas, prevents user from adding more
 
-                else{
+   else{
 
-                   alert("Too many rectangles! Press the reset button to start over.");
+     alert("Too many rectangles! Press the reset button to start over.");
 
-                   }
+   }
 
-                  }
+ }
 
-                 }
-} else if (event.type == "click") {
-                $(this).off('touchstart');
-                console.log("Only click event is fired");
-            }
+}
+
 
 
 
