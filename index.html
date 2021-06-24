@@ -334,17 +334,17 @@ function draw() {
     //defines touch variable to make the following code a little simpler
 
     var touch = event.touches[0];
-    var click = event.click[0];
+    //var click = event.click[0];
 
     //Fixes the value of pageX off set by the page scroll
 
     var touchX = touch.pageX-touch.target.offsetLeft;
-    var clickX = click.pageX-click.target.offsetLeft;
+    //var clickX = click.pageX-click.target.offsetLeft;
 
     //Fixes value of pageY. Now rectangles on the canvas appear on the touch target
 
     var touchY = touch.pageY-touch.target.offsetTop;
-    var clickY = click.pageY-click.target.offsetTop;
+    //var clickY = click.pageY-click.target.offsetTop;
 
     //Changes color of rectangle border
 
@@ -381,6 +381,54 @@ function draw() {
 
 
 //analysis and output of RGB data
+function initDraw(canvas) {
+    function setMousePosition(e) {
+        var ev = e || window.event; //Moz || IE
+        if (ev.pageX) { //Moz
+            mouse.x = ev.pageX + window.pageXOffset;
+            mouse.y = ev.pageY + window.pageYOffset;
+        } else if (ev.clientX) { //IE
+            mouse.x = ev.clientX + document.body.scrollLeft;
+            mouse.y = ev.clientY + document.body.scrollTop;
+        }
+    };
+
+    var mouse = {
+        x: 0,
+        y: 0,
+        startX: 0,
+        startY: 0
+    };
+    var element = null;
+
+    canvas.onmousemove = function (e) {
+        setMousePosition(e);
+        if (element !== null) {
+            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
+            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
+            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
+            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+        }
+    }
+
+    canvas.onclick = function (e) {
+        if (element !== null) {
+            element = null;
+            canvas.style.cursor = "default";
+            console.log("finsihed.");
+        } else {
+            console.log("begun.");
+            mouse.startX = mouse.x;
+            mouse.startY = mouse.y;
+            element = document.createElement('div');
+            element.className = 'rectangle'
+            element.style.left = mouse.x + 'px';
+            element.style.top = mouse.y + 'px';
+            canvas.appendChild(element)
+            canvas.style.cursor = "crosshair";
+        }
+    }
+}
 
 function analyze() {
 
@@ -610,7 +658,7 @@ function analyze() {
        // el.addEventListener('touchstart', handleInteraction)
         //el.addEventListener('click', handleInteraction)     
         canvas.addEventListener("touchstart", draw, false);
-        canvas.addEventListener("click",draw,false);
+        canvas.addEventListener("click",initDraw,false);
 
 
 
