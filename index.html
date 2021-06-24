@@ -334,14 +334,17 @@ function draw() {
     //defines touch variable to make the following code a little simpler
 
     var touch = event.touches[0];
+    var click = event.click[0];
 
     //Fixes the value of pageX off set by the page scroll
 
     var touchX = touch.pageX-touch.target.offsetLeft;
+    var clickX = click.pageX-click.target.offsetLeft;
 
     //Fixes value of pageY. Now rectangles on the canvas appear on the touch target
 
     var touchY = touch.pageY-touch.target.offsetTop;
+    var clickY = click.pageY-click.target.offsetTop;
 
     //Changes color of rectangle border
 
