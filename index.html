@@ -311,62 +311,9 @@ el.addEventListener('click', handleInteraction)
         startY: 0
     };
     var element = null;
-
-    canvas.onmousemove = function (e) {
-        setMousePosition(e);
-        if (element !== null) {
-            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
-            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
-            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
-            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
         }
     }
 
-    canvas.onclick = function (e) {
-        if (element !== null) {
-            element = null;
-            canvas.style.cursor = "default";
-            console.log("finsihed.");
-        } else {
-            console.log("begun.");
-            mouse.startX = mouse.x;
-            mouse.startY = mouse.y;
-            element = document.createElement('div');
-            element.style.left = mouse.x + 'px';
-            element.style.top = mouse.y + 'px';
-            canvas.appendChild(element)
-            canvas.style.cursor = "crosshair";
-        }
-    }
-}
-
-  public class getRGB{
-	
-	public static int x_co;
-	public static int y_co; 
-	
-	public static void main (String[] args){
-		
-		final IplImage src = cvLoadImage("resources/test.png"); //Images 'test.png' located under resource folder
-		cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);			    
-	    
-	    CvMouseCallback on_mouse = new CvMouseCallback() {
-            @Override
-            public void call(int event, int x, int y, int flags, 
-            		com.googlecode.javacpp.Pointer param) {
-            	if (event == CV_EVENT_MOUSEMOVE){
-            		x_co = x;
-            		y_co = y;
-            	}
-            	CvScalar s=cvGet2D(src,y_co,x_co);                
-                System.out.println( "B:"+ s.val(0) + " G:" + s.val(1) + " R:" + s.val(2));//Print values
-            }
-        };
-        
-        cvSetMouseCallback("Image", on_mouse, null);        
-	    cvShowImage("Image", src);
-	    cvWaitKey(0);
-	}	
 }
 
 }
