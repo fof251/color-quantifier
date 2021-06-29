@@ -381,7 +381,7 @@ function draw() {
 
 
 //analysis and output of RGB data
-function initDraw(canvas) {
+/* function initDraw(canvas) {
     function setMousePosition(e) {
         var ev = e || window.event; //Moz || IE
         if (ev.pageX) { //Moz
@@ -428,8 +428,13 @@ function initDraw(canvas) {
             canvas.style.cursor = "crosshair";
         }
     }
-}
-
+  } */
+  
+function draw_b() {
+  	  var a_canvas = document.getElementById("myCanvas"); // the is canvas a so it's getting the canvas element by it's 'a' id
+  	  var a_context = a_canvas.getContext("2d"); // this is to make it a 2dimensional rectangle
+  	  a_context.strokeRect(50, 25, 50, 50); //tells you the dimensions of the rectangle and how to fill it
+	  }
 function analyze() {
 
  //following code gets the image data from both rectangles and puts them into separate arrays
@@ -651,14 +656,14 @@ function analyze() {
         var context = canvas.getContext("2d");
 
         //On a single touch, "draw" function is called and draws a rectangle on the canvas
-        function handleInteraction(evt) {
+        /* function handleInteraction(evt) {
          evt.preventDefault()
          console.log('interacted')
-        }
+        } */
        // el.addEventListener('touchstart', handleInteraction)
         //el.addEventListener('click', handleInteraction)     
         canvas.addEventListener("touchstart", draw, false);
-        canvas.addEventListener("click",initDraw,false);
+        //canvas.addEventListener("click",initDraw,false);
 
 
 
@@ -681,6 +686,7 @@ function analyze() {
       <br>
 
       <a data-role="button" onClick="reset();">Reset</a>
+      <a data-role="button" onClick="draw_b();">Rectangle</a>
 
       
 
