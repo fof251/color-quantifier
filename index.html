@@ -40,7 +40,7 @@
 
 
 
-<head>
+ <head>
 
   <meta charset="utf-8">
 
@@ -290,67 +290,40 @@ function reset()
 
 //Creates drawing function for when user touches canvas
 
-function draw() {
-
+/* function draw() {
 //if statement for when context is called
-
  if (canvas.getContext) {
-
    //following code only happens if there are >2 rectangles on the canvas
-
    if (coords.length<4){
-
     //defines touch variable to make the following code a little simpler
-
     var touch = event.touches[0];
     //var click = event.click[0];
-
     //Fixes the value of pageX off set by the page scroll
-
     var touchX = touch.pageX-touch.target.offsetLeft;
     //var clickX = click.pageX-click.target.offsetLeft;
-
     //Fixes value of pageY. Now rectangles on the canvas appear on the touch target
-
     var touchY = touch.pageY-touch.target.offsetTop;
     //var clickY = click.pageY-click.target.offsetTop;
-
     //Changes color of rectangle border
-
     context.strokeStyle="#FF0000";
-
     //Changes width of rectangle border
-
     context.lineWidth=3;
-
     //Draws 250x300 rectangle outline so that top left corner is where user touches
-
     context.strokeRect(touchX, touchY, 150, 200);
-
     //Adds touchX and touchY to array coords
-
     coords.push(touchX,touchY);
-
     }
-
    //following alert pops up if there are already 2 rectangles on the canvas, prevents user from adding more
-
    else{
-
      alert("Too many rectangles! Press the reset button to start over.");
-
    }
-
  }
-
 }
-
-
-
+*/
 
 
 //analysis and output of RGB data
-function initDraw(canvas) {
+/* function initDraw(canvas) {
     function setMousePosition(e) {
         var ev = e || window.event; //Moz || IE
         if (ev.pageX) { //Moz
@@ -361,7 +334,6 @@ function initDraw(canvas) {
             mouse.y = ev.clientY + document.body.scrollTop;
         }
     };
-
     var mouse = {
         x: 0,
         y: 0,
@@ -369,7 +341,6 @@ function initDraw(canvas) {
         startY: 0
     };
     var element = null;
-
     canvas.onmousemove = function (e) {
         setMousePosition(e);
         if (element !== null) {
@@ -379,7 +350,6 @@ function initDraw(canvas) {
             element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
         }
     }
-
     canvas.onclick = function (e) {
         if (element !== null) {
             element = null;
@@ -397,17 +367,28 @@ function initDraw(canvas) {
             canvas.style.cursor = "crosshair";
         }
     }
-}
-
+  } */
+  
+function draw_b() {
+  	  var a_canvas = document.getElementById("myCanvas"); // the is canvas a so it's getting the canvas element by it's 'a' id
+  	  var a_context = a_canvas.getContext("2d"); // this is to make it a 2dimensional rectangle
+  	  a_context.strokeRect(50, 25, 50, 50); //tells you the dimensions of the rectangle and how to fill it
+	  var b_canvas = document.getElementById("myCanvas");
+	  var b_context = b_canvas.getContext("2d");
+	  b_context.strokeRect(0, 0, 10, 10); 
+	  }
+	  
 function analyze() {
 
  //following code gets the image data from both rectangles and puts them into separate arrays
 
- var imgData = context.getImageData(coords[0]+3,coords[1]+3, 150, 200);
+ //var imgData = context.getImageData(coords[0]+3,coords[1]+3, 150, 200);
+ var imgData = context.getImageData(50 ,25, 50, 50);
 
  var data = imgData.data;
 
- var imgData2 = context.getImageData(coords[2]+3,coords[3]+3,150,200);
+ //var imgData2 = context.getImageData(coords[2]+3,coords[3]+3,150,200);
+ var imgData2 = context.getImageData(0, 0, 10, 10); 
 
  var data2 = imgData2.data;
 
@@ -620,14 +601,14 @@ function analyze() {
         var context = canvas.getContext("2d");
 
         //On a single touch, "draw" function is called and draws a rectangle on the canvas
-        function handleInteraction(evt) {
+        /* function handleInteraction(evt) {
          evt.preventDefault()
          console.log('interacted')
-        }
+        } */
        // el.addEventListener('touchstart', handleInteraction)
         //el.addEventListener('click', handleInteraction)     
         canvas.addEventListener("touchstart", draw, false);
-        canvas.addEventListener("click",initDraw,false);
+        //canvas.addEventListener("click",initDraw,false);
 
 
 
@@ -650,6 +631,7 @@ function analyze() {
       <br>
 
       <a data-role="button" onClick="reset();">Reset</a>
+      <a data-role="button" onClick="draw_b();">Rectangle</a>
 
       
 
